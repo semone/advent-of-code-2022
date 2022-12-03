@@ -15,7 +15,7 @@ const points = {
   "C X" : 6 + 1,
 }
 
-const truePoints = {
+const trueMap = {
   "A X" : "A Z", 
   "B Y" : "B Y", 
   "C Z" : "C X",
@@ -32,7 +32,7 @@ function solvePartOne(input) {
 }
 
 function solvePartTwo(input) {
-  return parseInput(input).reduce((score, moves) => score + points[truePoints[moves]], 0)
+  return parseInput(input).reduce((score, moves) => score + points[trueMap[moves]], 0)
 }
 
 export {solvePartOne, solvePartTwo}
