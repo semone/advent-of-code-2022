@@ -1,4 +1,3 @@
-
 function getProcessedIndex(input, length) {
   for (let index = 0; index < input.length-length-1; index++) {
     if(new Set([...input.slice(0 + index, index + length)]).size === length){

@@ -5,7 +5,4 @@ const input = readFileSync('./input.txt', 'utf-8').trim()
 
 const part = process.env.part || "part1"
 
-if (part === "part1")
-    console.log(solvePartOne(input))
-else
-    console.log(solvePartTwo(input))
+part === "part1" ? console.log(solvePartOne(input)) : console.log(solvePartTwo(input))
