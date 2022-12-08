@@ -4,8 +4,7 @@ function parseInput(input: string) {
 
 function getSizes(input: string): { [key: string]: number } {
   let dirs = [];
-  let sizes = {};
-  parseInput(input).forEach((line) => {
+  return parseInput(input).reduce((sizes, line) => {
     const [a, _, c] = line.split(" ");
     if (a === "$") {
       if (c === "/") {
@@ -25,27 +24,24 @@ function getSizes(input: string): { [key: string]: number } {
         sizes[dir] = Number(sizes[dir]) + Number(a) || Number(a);
       });
     }
-  });
-
-  return sizes;
+    return sizes;
+  }, {});
 }
 
 function solvePartOne(input: string) {
-  const sizes = getSizes(input);
-  return Object.values(sizes).reduce((sum: number, next: number) => {
-    if (next < 100000) {
-      sum += next;
-    }
-    return sum;
-  }, 0);
+  return Object.values(getSizes(input)).reduce(
+    (sum: number, next: number) => (next < 100000 ? (sum += next) : sum),
+    0
+  );
 }
 
 function solvePartTwo(input: string) {
   const sizes = getSizes(input);
-  const possibleValuesToDelete = Object.values(sizes).filter((size) => {
-    return size >= 30000000 - (70000000 - sizes["/"]);
-  });
-  return Math.min(...possibleValuesToDelete);
+  return Math.min(
+    ...Object.values(getSizes(input)).filter(
+      (size) => size >= 30000000 - (70000000 - sizes["/"])
+    )
+  );
 }
 
 export { solvePartOne, solvePartTwo };
