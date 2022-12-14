@@ -15,7 +15,7 @@ type Point = {
   y: number;
 };
 
-const getClosestPath = (data: string[], source: Point, destination: Point) => {
+function getClosestPath(data: string[], source: Point, destination: Point) {
   const heightMap = data.map((row, y) =>
     [...row].map(
       (elevation, x) =>
@@ -65,7 +65,7 @@ const getClosestPath = (data: string[], source: Point, destination: Point) => {
     });
   }
   return heightMap.at(destination.y).at(destination.x).distance;
-};
+}
 
 function findIndices(data: string[], value: string): Point[] {
   return data
@@ -75,14 +75,14 @@ function findIndices(data: string[], value: string): Point[] {
     .map((m) => ({ x: m.x, y: m.y }));
 }
 
-const solvePartOne = (input: string) => {
+function solvePartOne(input: string) {
   const data = parseInput(input);
   const sourcePoint = findIndices(data, "S")[0];
   const destinationPoint = findIndices(data, "E")[0];
   return getClosestPath(data, sourcePoint, destinationPoint);
-};
+}
 
-const solvePartTwo = (input: string) => {
+function solvePartTwo(input: string) {
   const data = parseInput(input);
   const sourcePoints = findIndices(data, "a");
   const destinationPoint = findIndices(data, "E")[0];
@@ -92,6 +92,6 @@ const solvePartTwo = (input: string) => {
     dist = distance < dist && distance !== 0 ? distance : dist;
   }
   return dist;
-};
+}
 
 export { solvePartOne, solvePartTwo };
