@@ -39,22 +39,15 @@ const pourSand = (cave: Cave, yMax: number, part2 = false) => {
     let sand = { x: 500, y: 0 };
     while (true) {
       const cond = part2 ? sand.y + 1 < yMax + 2 : true;
-      if (
-        !cave.hasOwnProperty(JSON.stringify({ x: sand.x, y: sand.y + 1 })) &&
-        cond
-      ) {
+      if (!cave.hasOwnProperty(sandStringCoord(sand.x, sand.y + 1)) && cond) {
         sand.y++;
       } else if (
-        !cave.hasOwnProperty(
-          JSON.stringify({ x: sand.x - 1, y: sand.y + 1 })
-        ) &&
+        !cave.hasOwnProperty(sandStringCoord(sand.x - 1, sand.y + 1)) &&
         cond
       ) {
         sand.x--;
       } else if (
-        !cave.hasOwnProperty(
-          JSON.stringify({ x: sand.x + 1, y: sand.y + 1 })
-        ) &&
+        !cave.hasOwnProperty(sandStringCoord(sand.x + 1, sand.y + 1)) &&
         cond
       ) {
         sand.x++;
